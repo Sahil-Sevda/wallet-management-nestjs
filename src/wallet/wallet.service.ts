@@ -152,7 +152,7 @@ export class WalletService {
                 throw new HttpException('Transaction not found', HttpStatus.NOT_FOUND);
             }
 
-            // Optional: Check if already reversed, or transaction type allowed to reverse
+            // is transaction type allowed to reverse
             if (transaction.isReversed) {
                 throw new HttpException('Transaction already reversed', HttpStatus.BAD_REQUEST);
             }
@@ -162,7 +162,7 @@ export class WalletService {
                 throw new HttpException('Wallet not found', HttpStatus.NOT_FOUND);
             }
 
-            // Calculate reverse amount (opposite effect)
+            // reverse amount
             let reverseAmount = transaction.amount;
             if (['withdrawal', 'transfer_out'].includes(transaction.type)) {
                 reverseAmount = transaction.amount; // credit back
